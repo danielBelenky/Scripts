@@ -1,11 +1,11 @@
 #!/bin/bash
 
-usage(){
+function usage(){
 	cat<<EOF
 Usage:
 ./daniel.sh <command to wrap> -arg <num of args to pass the wrapped command> <arg1> .. <arg2> .. <argN> <main args (-c --failed-count and etc...)>
 
-Example: ./daniel.sh ping -arg 1 www.google.com -c 3 --net-trace --debug
+Example: ./daniel.sh netstat -arg 1 -a -c 3 --net-trace --debug
 
         -h              Help
 	-c		Number of times to run the given command
@@ -20,6 +20,16 @@ Example: ./daniel.sh ping -arg 1 www.google.com -c 3 --net-trace --debug
 EOF
 }
 
+function onExit(){
+	echo ""
+	echo "Terminating..."
+	echo "Run finished... printing summary:"
+	echo "Most common return code: "$exStat
+	exit
+}
+
+trap onExit SIGINT SIGTERM
+
 _DEBUG="off"
 
 #Base vars
@@ -30,6 +40,7 @@ SYS_TRACE=false
 CALL_TRACE=false
 LOG_TRACE=false
 DEBUG=false
+
 
 #Command and its args
 COM=$1
@@ -51,43 +62,35 @@ while true ; do
 		
 		shift 2
 		;;
-
 	-h)
 		usage
 		break
 		;;
-
 	--failed-count)
 		FAILEDCNT=$2
 		shift 2
 		;;
-	
 	--net-trace)
 		NET_TRACE=true
 		shift
 		;;
-
 	--sys-trace)
 		SYS_TRACE=true
 		shift
 		;;
-
 	--call-trace)
 		CALL_TRACE=true
 		shift
 		;;
-
 	--log-trace)
 		LOG_TRACE=true
 		shift
 		;;
-
 	--debug)
 	        set -x
 		DEBUG=true
 		shift
 		;;
-
 	--)
 		shift
 		break
@@ -95,13 +98,31 @@ while true ; do
 
 	esac
 done
+#Commented out. Exists just for debugging
+#sleep 30
 
 #Execute the given command C times
-eCOM=eval "$COM"
 exStat=0 #Var to hold the exit status
-
 for (( i=1; i<=$COUNT; i++ )){
-	#TODO:
-	#Add Commands hold functionality
-	#Check if the command is running (Maybe with ps?), and get it's exit status into an array.
- }
+	eval $COM &> /dev/null #Suppress command's stderr and stdout
+
+	#Wait for the proccess/command to finish before continue
+	waitForMe=$(ps -e | grep $COM | awk '{ print $1 }')
+	wait $waitForMe
+
+	if (( $? != 0 )); then
+		((exStat++)) #Returned 1
+	else
+		((exStat--)) #Returned 0
+	fi
+	#Redirect the output of the command to /dev/null, and also it's stdout, stderr
+}
+
+if (( exStat < 1)); then
+	((exStat=0)) #We had more successful exits
+else
+	((exStat=1)) #We had more exits with error
+fi
+
+echo "Run finished OK... printing summary:"
+echo "Most common return code: "$exStat
