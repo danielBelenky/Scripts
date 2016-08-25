@@ -21,8 +21,14 @@ EOF
 }
 
 function onExit(){
-	echo ""
-	echo "Terminating..."
+
+#TODO: More tests on traping signals.
+	if (( exStat < 1)); then
+		((exStat=0)) #We had more successful exits
+	else
+		((exStat=1)) #We had more exits with error
+	fi
+
 	echo "Run finished... printing summary:"
 	echo "Most common return code: "$exStat
 	exit
@@ -104,6 +110,7 @@ done
 #Execute the given command C times
 exStat=0 #Var to hold the exit status
 for (( i=1; i<=$COUNT; i++ )){
+	trap onExit SIGINT SIGTERM
 	eval $COM &> /dev/null #Suppress command's stderr and stdout
 
 	#Wait for the proccess/command to finish before continue
@@ -118,11 +125,3 @@ for (( i=1; i<=$COUNT; i++ )){
 	#Redirect the output of the command to /dev/null, and also it's stdout, stderr
 }
 
-if (( exStat < 1)); then
-	((exStat=0)) #We had more successful exits
-else
-	((exStat=1)) #We had more exits with error
-fi
-
-echo "Run finished OK... printing summary:"
-echo "Most common return code: "$exStat
