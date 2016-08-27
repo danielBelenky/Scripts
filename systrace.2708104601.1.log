@@ -1,0 +1,78 @@
+Memory usage: 1099/3951(mb) (27.8157% used)
+Now logging the I/O stats:
+Linux 4.4.0-34-generic (daniel) 	27/08/16 	_x86_64_	(1 CPU)
+
+avg-cpu:  %user   %nice %system %iowait  %steal   %idle
+          10.74    0.06    1.26    0.03    0.00   87.91
+
+Device:         rrqm/s   wrqm/s     r/s     w/s    rkB/s    wkB/s avgrq-sz avgqu-sz   await r_await w_await  svctm  %util
+sda               0.01     1.15    1.95    0.69    66.12    32.38    74.37     0.00    0.85    0.76    1.12   0.38   0.10
+
+  PID  SPID  STARTED     TIME CMD
+ 4283  4283 09:03:49 00:00:00 sudo tcpdump -n -w tcpdump.2608201221.1.cap
+ 4294  4294 09:03:49 00:00:00 tcpdump -n -w tcpdump.2608201221.1.cap
+ 4320  4320 09:03:52 00:00:00 sudo tcpdump -n -w tcpdump.2608201224.2.cap
+ 4331  4331 09:03:52 00:00:00 tcpdump -n -w tcpdump.2608201224.2.cap
+ 4341  4341 09:03:54 00:00:00 sudo tcpdump -n -w tcpdump.2608201226.3.cap
+ 4351  4351 09:03:54 00:00:00 tcpdump -n -w tcpdump.2608201226.3.cap
+ 4543  4543 09:08:43 00:00:00 sudo tcpdump -w tcpdump.2608201715.1.cap
+ 4546  4546 09:08:43 00:00:00 tcpdump -w tcpdump.2608201715.1.cap
+ 4556  4556 09:08:57 00:00:00 sudo tcpdump -w tcpdump.2608201729.1.cap
+ 4559  4559 09:08:57 00:00:00 tcpdump -w tcpdump.2608201729.1.cap
+ 4566  4566 09:09:01 00:00:00 sudo tcpdump -w tcpdump.2608201733.1.cap
+ 4569  4569 09:09:01 00:00:00 tcpdump -w tcpdump.2608201733.1.cap
+ 4579  4579 09:10:42 00:00:00 sudo tcpdump -w tcpdump.2608201914.1.cap
+ 4583  4583 09:10:42 00:00:00 tcpdump -w tcpdump.2608201914.1.cap
+ 6429  6429 10:46:01 00:00:00 sudo ./daniel.sh ./falst.sh -c 2 --log-trace --sys-trace --call-trace --net-trace --failed-count 1
+ 6430  6430 10:46:01 00:00:00 /bin/bash ./daniel.sh ./falst.sh -c 2 --log-trace --sys-trace --call-trace --net-trace --failed-count 1
+ 6433  6433 10:46:01 00:00:00 tcpdump -n -w net.2708104601.1.pcap
+ 6439  6439 10:46:01 00:00:00 /bin/bash ./daniel.sh ./falst.sh -c 2 --log-trace --sys-trace --call-trace --net-trace --failed-count 1
+ 6440  6440 10:46:01 00:00:00 strace -f ./falst.sh
+ 6442  6442 10:46:01 00:00:00 ps -T -o pid,spid,start,time,cmd
+ 6443  6443 10:46:01 00:00:00 /bin/bash ./falst.sh
+  PID  SPID  STARTED     TIME CMD
+ 4283  4283 09:03:49 00:00:00 sudo tcpdump -n -w tcpdump.2608201221.1.cap
+ 4294  4294 09:03:49 00:00:00 tcpdump -n -w tcpdump.2608201221.1.cap
+ 4320  4320 09:03:52 00:00:00 sudo tcpdump -n -w tcpdump.2608201224.2.cap
+ 4331  4331 09:03:52 00:00:00 tcpdump -n -w tcpdump.2608201224.2.cap
+ 4341  4341 09:03:54 00:00:00 sudo tcpdump -n -w tcpdump.2608201226.3.cap
+ 4351  4351 09:03:54 00:00:00 tcpdump -n -w tcpdump.2608201226.3.cap
+ 4543  4543 09:08:43 00:00:00 sudo tcpdump -w tcpdump.2608201715.1.cap
+ 4546  4546 09:08:43 00:00:00 tcpdump -w tcpdump.2608201715.1.cap
+ 4556  4556 09:08:57 00:00:00 sudo tcpdump -w tcpdump.2608201729.1.cap
+ 4559  4559 09:08:57 00:00:00 tcpdump -w tcpdump.2608201729.1.cap
+ 4566  4566 09:09:01 00:00:00 sudo tcpdump -w tcpdump.2608201733.1.cap
+ 4569  4569 09:09:01 00:00:00 tcpdump -w tcpdump.2608201733.1.cap
+ 4579  4579 09:10:42 00:00:00 sudo tcpdump -w tcpdump.2608201914.1.cap
+ 4583  4583 09:10:42 00:00:00 tcpdump -w tcpdump.2608201914.1.cap
+ 6429  6429 10:46:01 00:00:00 sudo ./daniel.sh ./falst.sh -c 2 --log-trace --sys-trace --call-trace --net-trace --failed-count 1
+ 6430  6430 10:46:01 00:00:00 /bin/bash ./daniel.sh ./falst.sh -c 2 --log-trace --sys-trace --call-trace --net-trace --failed-count 1
+ 6433  6433 10:46:01 00:00:00 tcpdump -n -w net.2708104601.1.pcap
+ 6439  6439 10:46:01 00:00:00 /bin/bash ./daniel.sh ./falst.sh -c 2 --log-trace --sys-trace --call-trace --net-trace --failed-count 1
+ 6440  6440 10:46:01 00:00:00 strace -f ./falst.sh
+ 6443  6443 10:46:01 00:00:00 /bin/bash ./falst.sh
+ 6444  6444 10:46:01 00:00:00 ping -c 3 www.google.com
+ 6446  6446 10:46:02 00:00:00 ps -T -o pid,spid,start,time,cmd
+  PID  SPID  STARTED     TIME CMD
+ 4283  4283 09:03:49 00:00:00 sudo tcpdump -n -w tcpdump.2608201221.1.cap
+ 4294  4294 09:03:49 00:00:00 tcpdump -n -w tcpdump.2608201221.1.cap
+ 4320  4320 09:03:52 00:00:00 sudo tcpdump -n -w tcpdump.2608201224.2.cap
+ 4331  4331 09:03:52 00:00:00 tcpdump -n -w tcpdump.2608201224.2.cap
+ 4341  4341 09:03:54 00:00:00 sudo tcpdump -n -w tcpdump.2608201226.3.cap
+ 4351  4351 09:03:54 00:00:00 tcpdump -n -w tcpdump.2608201226.3.cap
+ 4543  4543 09:08:43 00:00:00 sudo tcpdump -w tcpdump.2608201715.1.cap
+ 4546  4546 09:08:43 00:00:00 tcpdump -w tcpdump.2608201715.1.cap
+ 4556  4556 09:08:57 00:00:00 sudo tcpdump -w tcpdump.2608201729.1.cap
+ 4559  4559 09:08:57 00:00:00 tcpdump -w tcpdump.2608201729.1.cap
+ 4566  4566 09:09:01 00:00:00 sudo tcpdump -w tcpdump.2608201733.1.cap
+ 4569  4569 09:09:01 00:00:00 tcpdump -w tcpdump.2608201733.1.cap
+ 4579  4579 09:10:42 00:00:00 sudo tcpdump -w tcpdump.2608201914.1.cap
+ 4583  4583 09:10:42 00:00:00 tcpdump -w tcpdump.2608201914.1.cap
+ 6429  6429 10:46:01 00:00:00 sudo ./daniel.sh ./falst.sh -c 2 --log-trace --sys-trace --call-trace --net-trace --failed-count 1
+ 6430  6430 10:46:01 00:00:00 /bin/bash ./daniel.sh ./falst.sh -c 2 --log-trace --sys-trace --call-trace --net-trace --failed-count 1
+ 6433  6433 10:46:01 00:00:00 tcpdump -n -w net.2708104601.1.pcap
+ 6439  6439 10:46:01 00:00:00 /bin/bash ./daniel.sh ./falst.sh -c 2 --log-trace --sys-trace --call-trace --net-trace --failed-count 1
+ 6440  6440 10:46:01 00:00:00 strace -f ./falst.sh
+ 6443  6443 10:46:01 00:00:00 /bin/bash ./falst.sh
+ 6444  6444 10:46:01 00:00:00 ping -c 3 www.google.com
+ 6448  6448 10:46:03 00:00:00 ps -T -o pid,spid,start,time,cmd
